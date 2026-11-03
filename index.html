@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge Hub · Scalantec Ops</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Static mockup of a knowledge hub tab inside the Scalantec Ops console.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Ops console navigation">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 28" aria-hidden="true">
+          <rect x="2" y="3" width="30" height="9" rx="4.5" fill="#f5a524"/>
+          <rect x="8" y="15" width="30" height="9" rx="4.5" fill="#e5484d"/>
+        </svg>
+        <span class="brand-name">Scalantec</span>
+        <span class="brand-tag">OPS</span>
+      </div>
+
+      <nav class="side-nav">
+        <a class="side-link" aria-disabled="true"><i data-lucide="layout-grid"></i>Dashboard</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="workflow"></i>Automations</a>
+
+        <p class="side-label">Operate</p>
+        <a class="side-link" aria-disabled="true"><i data-lucide="users"></i>Clients</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="list-checks"></i>Tasks</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="send"></i>Campaigns</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="globe"></i>Deliverability</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="inbox"></i>Discrepancies</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="wrench"></i>Tools</a>
+        <a class="side-link is-active" aria-current="page"><i data-lucide="book-open"></i>Knowledge hub<span class="new-pill">New</span></a>
+
+        <p class="side-label">Deliver</p>
+        <a class="side-link" aria-disabled="true"><i data-lucide="file-bar-chart"></i>Reports</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="clipboard-list"></i>Surveys</a>
+        <a class="side-link" aria-disabled="true"><i data-lucide="key-round"></i>Secrets</a>
+      </nav>
+
+      <div class="side-footer">
+        <div>
+          <p class="side-user">Khali Pham</p>
+          <p class="side-org">Scalantec</p>
+        </div>
+        <i data-lucide="log-out"></i>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hub-header">
+        <div class="hub-title-row">
+          <div>
+            <p class="eyebrow"><span class="dot"></span>Static mockup</p>
+            <h1><i data-lucide="book-open"></i>Knowledge hub</h1>
+            <p class="lede">Where things are and how a campaign gets built, explained simply. Look here first, then ask a person or Claude.</p>
+          </div>
+          <label class="search">
+            <i data-lucide="search"></i>
+            <input id="search" type="search" placeholder="Search tools, terms, places…" autocomplete="off">
+            <kbd>/</kbd>
+          </label>
+        </div>
+
+        <nav class="hub-tabs" role="tablist" aria-label="Knowledge hub sections">
+          <button role="tab" data-tab="start"><i data-lucide="sparkles"></i>Start here</button>
+          <button role="tab" data-tab="flow"><i data-lucide="git-commit-horizontal"></i>The flow</button>
+          <button role="tab" data-tab="tools"><i data-lucide="link"></i>Tools &amp; logins</button>
+          <button role="tab" data-tab="where"><i data-lucide="map-pin"></i>Where is what</button>
+          <button role="tab" data-tab="learnings"><i data-lucide="lightbulb"></i>Learnings</button>
+          <button role="tab" data-tab="glossary"><i data-lucide="book-a"></i>Glossary</button>
+        </nav>
+      </header>
+
+      <section id="view" class="view" role="tabpanel" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
