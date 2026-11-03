@@ -1,7 +1,7 @@
 # Scalantec Ops · Knowledge hub mockup
 
-Static mockup of a "Knowledge hub" tab for the Scalantec Ops console. Only the hub works. The rest of the console menu is for looks.
+Static mockup of a "Knowledge hub" tab for the Scalantec Ops console. Only the hub works, the rest of the console menu is there for the look.
 
-The hub has six tabs: Start here, The flow (from understanding a client to handling replies), Tools & logins, Where is what, Learnings and Glossary. Search across all of them with `/`.
+The landing page is the path a campaign takes (understand, find, build, review, send). Each stage has the steps, a small interactive visual, tips from what we learned, links, a Claude prompt and who to ask. Tools, "Where is what" and the glossary are one click away, and `/` searches all of it.
 
-All content sits in `data.js`, so changing the hub means editing one file. No build step. Open `index.html` or serve the folder.
+All content sits in `data.js`, so changing the hub means editing one file. No build step, just open `index.html` or serve the folder.
