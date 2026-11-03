@@ -34,13 +34,6 @@ function renderPath() {
     </button>`).join("");
 
   return `
-    <div class="path-top">
-      <p class="path-intro">Five stages, from "who is this client?" to the first replies. Click a stage to see what happens there.</p>
-      <div class="ask-row"><span>Who to ask</span>${Object.keys(PEOPLE).map((k) => `
-        <span class="ask" tabindex="0">${avatar(k)}<span class="ask-tip"><strong>${esc(PEOPLE[k].name)}</strong>${esc(PEOPLE[k].about)}</span></span>`).join("")}
-      </div>
-    </div>
-
     <div class="track" style="--progress:${(stageIdx / (STAGES.length - 1)) * 100}%">
       <div class="track-line"><span class="track-fill"></span></div>
       ${nodes}
@@ -64,7 +57,7 @@ function renderPath() {
         <div class="foot-col">
           <h3 class="sub-h"><i data-lucide="link"></i>Open</h3>
           <div class="link-row">${s.links.map(linkPill).join("")}</div>
-          <div class="owner">${avatar(s.owner)}<span>Stuck here? <strong>${esc(PEOPLE[s.owner].name)}</strong> knows this part best.</span></div>
+          <div class="owner">${avatar(s.owner)}<span>Questions about this part? <strong>${esc(PEOPLE[s.owner].name)}</strong> can help.</span></div>
         </div>
         <div class="prompt">
           <div class="label"><i data-lucide="sparkles"></i>Ask Claude</div>
@@ -82,7 +75,7 @@ function renderPath() {
     <div class="shortcuts">
       <button class="shortcut" data-go="tools" style="--c:#5b8cff"><span class="sc-icon"><i data-lucide="link"></i></span><span><strong>Tools</strong><small>${TOOLS.length} links and where the login is</small></span><i class="sc-arrow" data-lucide="arrow-up-right"></i></button>
       <button class="shortcut" data-go="where" style="--c:#f5a524"><span class="sc-icon"><i data-lucide="map-pin"></i></span><span><strong>Where is what</strong><small>Client facts, files, logins, guides</small></span><i class="sc-arrow" data-lucide="arrow-up-right"></i></button>
-      <button class="shortcut" data-go="glossary" style="--c:#a78bfa"><span class="sc-icon"><i data-lucide="book-a"></i></span><span><strong>Glossary</strong><small>${GLOSSARY.length} words you'll hear a lot</small></span><i class="sc-arrow" data-lucide="arrow-up-right"></i></button>
+      <button class="shortcut" data-go="glossary" style="--c:#a78bfa"><span class="sc-icon"><i data-lucide="book-a"></i></span><span><strong>Glossary</strong><small>${GLOSSARY.length} words that come up a lot</small></span><i class="sc-arrow" data-lucide="arrow-up-right"></i></button>
     </div>`;
 }
 
@@ -97,14 +90,14 @@ const BLANKS = ["Who is the client?", "What do they sell?", "Who pays for it?", 
 const VISUALS = {
   sentence: () => `
     <div class="vis-card">
-      <span class="vis-label">The one-sentence test · example</span>
+      <span class="vis-label">Example</span>
       <p class="sentence" id="sentence">${sentenceHTML(0)}</p>
       <p class="vis-hint"><i data-lucide="mouse-pointer-2"></i>Hover a part to see the question behind it</p>
     </div>`,
 
   sources: () => `
     <div class="vis-card">
-      <span class="vis-label">Where to look</span>
+      <span class="vis-label">Where the companies come from</span>
       <div class="sources">
         <div class="src-list">${SOURCES.map((s, i) => `<button class="src" data-best="${esc(s.best)}" style="--d:${i * 0.35}s">${esc(s.name)}<span class="src-flow"></span></button>`).join("")}</div>
         <div class="src-target"><i data-lucide="table"></i><span>One company table in Clay</span></div>
@@ -114,7 +107,7 @@ const VISUALS = {
 
   funnel: () => `
     <div class="vis-card">
-      <span class="vis-label">How the list shrinks · example shape</span>
+      <span class="vis-label">How the list gets smaller (example)</span>
       <div class="funnel">${FUNNEL.map((f, i) => `
         <div class="fbar" data-d="${esc(f.d)}" tabindex="0"><span class="fbar-fill" style="--w:${f.w}%;--i:${i}"></span><span class="fbar-label">${esc(f.label)}</span></div>`).join("")}
       </div>
@@ -123,7 +116,7 @@ const VISUALS = {
 
   checklist: () => `
     <div class="vis-card">
-      <span class="vis-label">Before anyone else sees it</span>
+      <span class="vis-label">Checks before you share it</span>
       <ul class="checks">${REVIEW_CHECKS.map((c, i) => `
         <li class="check" style="--i:${i}" tabindex="0"><span class="box"><i data-lucide="check"></i></span><div><strong>${esc(c.t)}</strong><span>${esc(c.d)}</span></div></li>`).join("")}
       </ul>
@@ -132,7 +125,7 @@ const VISUALS = {
 
   gates: () => `
     <div class="vis-card">
-      <span class="vis-label">From inbox to reply · Muriel's walkthrough</span>
+      <span class="vis-label">From new inbox to first reply</span>
       <ol class="gates">${GATES.map((g) => `
         <li class="gate ${g.gate ? "is-gate" : ""}" tabindex="0">
           <span class="gate-dot">${g.gate ? `<span class="light"></span>` : ""}</span>
@@ -178,7 +171,7 @@ function toolCard(t) {
 function renderTools() {
   const groups = [{ id: "start", title: "Every day", color: "#9aa6bd" }, ...STAGES.filter((s) => TOOLS.some((t) => t.stage === s.id)).map((s) => ({ id: s.id, title: `${s.label} ${s.sub}`, color: s.color }))];
   return `
-    <p class="note"><i data-lucide="shield"></i>No passwords here. Shared logins are in the <strong>Secrets</strong> tab. The access notes are a first draft, so please check them with Leon.</p>
+    <p class="note"><i data-lucide="shield"></i>Shared logins are in the <strong>Secrets</strong> tab. The access notes here are a first draft, so it's worth checking them with Leon.</p>
     ${groups.map((g) => `
       <div class="section-title"><h2><span class="dot-c" style="--c:${g.color}"></span>${esc(g.title)}</h2></div>
       <div class="grid">${TOOLS.filter((t) => t.stage === g.id).map(toolCard).join("")}</div>`).join("")}`;
